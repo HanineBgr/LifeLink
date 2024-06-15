@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "126670609561",
+    "project_id": "fir-auth-dcb7e",
+    "storage_bucket": "fir-auth-dcb7e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126670609561:android:a1c5359918633204822c08",
+        "android_client_info": {
+          "package_name": "com.example.flutter_firebase_auth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYEpz-8E_nFr1POm9Nui_VW6J4Xqi5ATk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126670609561:android:cac94e14a2346aad822c08",
+        "android_client_info": {
+          "package_name": "com.example.glumate_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYEpz-8E_nFr1POm9Nui_VW6J4Xqi5ATk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
