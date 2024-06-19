@@ -3,30 +3,10 @@ import 'package:glumate_flutter/presentation/Design/Round_Button.dart';
 import 'package:glumate_flutter/presentation/Design/colors.dart';
 import 'package:glumate_flutter/presentation/Design/styles/colors.dart';
 import 'package:glumate_flutter/presentation/Design/styles/styles.dart';
+import 'package:glumate_flutter/presentation/TopDoctor.dart';
 import 'package:lottie/lottie.dart';
 
-List<Map> doctors = [
-  {
-    'img': 'assets/doctor02.png',
-    'doctorName': 'Dr. Gardner Pearson',
-    'doctorTitle': 'Heart Specialist'
-  },
-  {
-    'img': 'assets/doctor03.jpeg',
-    'doctorName': 'Dr. Rosa Williamson',
-    'doctorTitle': 'Skin Specialist'
-  },
-  {
-    'img': 'assets/doctor02.png',
-    'doctorName': 'Dr. Gardner Pearson',
-    'doctorTitle': 'Heart Specialist'
-  },
-  {
-    'img': 'assets/doctor03.jpeg',
-    'doctorName': 'Dr. Rosa Williamson',
-    'doctorTitle': 'Skin Specialist'
-  }
-];
+
 
 class HomeTab extends StatelessWidget {
   final void Function() onPressedScheduleCard;
@@ -40,7 +20,43 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
     double screenWidth = MediaQuery.of(context).size.width;
-
+final List<Doctor> doctors = [
+  Doctor(
+    name: 'Dr. Ahmed Sala',
+    specialty: 'Cardiologist',
+    imageUrl: 'assets/images/doctor1.jpg',
+    rating: 4.7,
+    location: '800m ',
+  ),
+  Doctor(
+    name: 'Dr. Sarah Smith',
+    specialty: 'Neurologist',
+    imageUrl: 'assets/images/doctor2.jpg',
+    rating: 4.9,
+    location: '1.2km ',
+  ),
+  Doctor(
+    name: 'Dr. Michael Lee',
+    specialty: 'Dermatologist',
+    imageUrl: 'assets/images/doctor3.jpg',
+    rating: 4.6,
+    location: '1.5km ',
+  ),
+  Doctor(
+    name: 'Dr. Emily Johnson',
+    specialty: 'Pediatrician',
+    imageUrl: 'assets/images/doctor4.jpg',
+    rating: 4.8,
+    location: '2km ',
+  ),
+  Doctor(
+    name: 'Dr. James Brown',
+    specialty: 'Orthopedic Surgeon',
+    imageUrl: 'assets/images/doctor5.jpg',
+    rating: 4.5,
+    location: '2.5km ',
+  ),
+];
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Container(
@@ -128,129 +144,40 @@ class HomeTab extends StatelessWidget {
               ),
             ),
               SizedBox(
-               width: 100,
+              height:10,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                 SizedBox(width: 100,),
-                  TextButton(
-                    child: Text(
-                      'See All',
-                      style: TextStyle(
-                        color: Color(MyColors.blue),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    onPressed: () {},
-                  )
-                ],
-              ),
-              Text(
-                'Top Doctor',
-                style: TextStyle(
-                  color: Color(MyColors.header01),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              for (var doctor in doctors)
-                TopDoctorCard(
-                  img: doctor['img'],
-                  doctorName: doctor['doctorName'],
-                  doctorTitle: doctor['doctorTitle'],
-                )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class TopDoctorCard extends StatelessWidget {
-  String img;
-  String doctorName;
-  String doctorTitle;
-
-  TopDoctorCard({
-    required this.img,
-    required this.doctorName,
-    required this.doctorTitle,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-  double screenWidth = MediaQuery.of(context).size.width;
-
-    return Card(
-      margin: EdgeInsets.only(bottom: 20),
-      child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(context, '/detail');
-        },
-        child: Row(
-          children: [
-            Container(
-              color: Color(MyColors.grey01),
-              child: Image(
-                width: 100,
-                image: AssetImage(img),
-              ),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+                 Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  doctorName,
+                  'Top Doctor',
                   style: TextStyle(
                     color: Color(MyColors.header01),
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
                   ),
                 ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  doctorTitle,
-                  style: TextStyle(
-                    color: Color(MyColors.grey02),
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
+                TextButton(
+                  child: Text(
+                    'See All',
+                    style: TextStyle(
+                      color: Color(MyColors.blue),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
+                  onPressed: () {},
                 ),
-                SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.star,
-                      color: Color(MyColors.yellow02),
-                      size: 18,
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      '4.0 - 50 Reviews',
-                      style: TextStyle(color: Color(MyColors.grey02)),
-                    )
-                  ],
-                )
               ],
-            )
+            ),
+           
+            TopDoctor(),
           ],
         ),
       ),
-    );
+    ));
   }
+
+
 }
 
 class AppointmentCard extends StatelessWidget {
