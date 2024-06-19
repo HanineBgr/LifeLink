@@ -3,6 +3,7 @@ import 'package:glumate_flutter/presentation/Design/Round_Button.dart';
 import 'package:glumate_flutter/presentation/Design/colors.dart';
 import 'package:glumate_flutter/presentation/Design/styles/colors.dart';
 import 'package:glumate_flutter/presentation/Design/styles/styles.dart';
+import 'package:lottie/lottie.dart';
 
 List<Map> doctors = [
   {
@@ -37,7 +38,8 @@ class HomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        var media = MediaQuery.of(context).size;
+    var media = MediaQuery.of(context).size;
+    double screenWidth = MediaQuery.of(context).size.width;
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -53,7 +55,7 @@ class HomeTab extends StatelessWidget {
           ),
         ),
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 30),
+          padding: EdgeInsets.symmetric(horizontal: 18),
           child: ListView(
             children: [
               SizedBox(
@@ -61,7 +63,7 @@ class HomeTab extends StatelessWidget {
               ),
               UserIntro(),
               SizedBox(
-                height: 10,
+                height: 20,
               ),
               SearchInput(),
               SizedBox(
@@ -70,57 +72,64 @@ class HomeTab extends StatelessWidget {
               CategoryIcons(),
              
               SizedBox(
-                height: 5,
+                height: 20,
               ),
-               Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10),
-                  child: Container(
-                    padding: const EdgeInsets.all(20),
-                    height: media.width * 0.32,
+                ClipRRect(
+              borderRadius: BorderRadius.circular(40),
+              child: Stack(
+                children: [
+                  Container(
+                    height:140,
+                    width: screenWidth,             
                     decoration: BoxDecoration(
-                        gradient: LinearGradient(colors: [
-                          TColor.primaryColor2.withOpacity(0.4),
-                          TColor.primaryColor1.withOpacity(0.4)
-                        ]),
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        color: Color.fromARGB(255, 205, 229, 249),
+                        //border: Border.all(color: Colors.indigo.shade300)
+                        ),
+                  ),
+                  Positioned(
+                    height: 160,
+                    right: -60,
+                    bottom: -22,
+                    child: Lottie.asset('assets/Lottie/yoga.json'),
+                  ),
+                  Positioned.fill(
+                    top: 15,
+                    left: 25,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Early protection for\nyour family health!",
-                                style: TextStyle(
-                                  color: TColor.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
+                        const Text(
+                          "Early protection for \nyour family health!",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        
+                        SizedBox(
+                          width: 140,
+                          child: FilledButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                foregroundColor: Colors.indigo,
                               ),
-                              SizedBox(height: 10,),
-                              SizedBox(
-                                width: 110,
-                                height: 35,
-                                child: RoundButton(
-                                    title: "Learn More",
-                                    fontSize: 12,
-                                    onPressed: () {}),
-                              )
-                            ]),
-                            SizedBox(width:10),
-                        Image.asset(
-                          "assets/doc.png",
-                          width:150
-                        )
+                              onPressed: () {
+
+                              },
+                              child: const Text("START")),
+                        ),
+                        const Spacer(),
                       ],
                     ),
                   ),
-                ),
+                ],
+              ),
+            ),
               SizedBox(
                width: 100,
               ),
-              
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -174,6 +183,8 @@ class TopDoctorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  double screenWidth = MediaQuery.of(context).size.width;
+
     return Card(
       margin: EdgeInsets.only(bottom: 20),
       child: InkWell(
@@ -433,12 +444,12 @@ class CategoryIcon extends StatelessWidget {
               width: 50,
               height: 50,
               decoration: BoxDecoration(
-                color: Color(MyColors.bs),
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Icon(
                 icon,
-                color: Colors.white,
+                color: Color(MyColors.bs),
                 size: 30,
               ),
             ),
