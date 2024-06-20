@@ -3,25 +3,25 @@ import 'package:flutter/material.dart';
 class TopDoctor extends StatelessWidget {
   final List<Doctor> doctors = [
     Doctor(
-      name: "Dr. Ahmed Salah",
+      name: "Dr. Houria Abidi",
       specialty: "Cardiologist",
       imageUrl: 'assets/doc1.png',
       rating: 4.2,
-      location: "2km away",
+      location: "2km ",
     ),
     Doctor(
-      name: "Dr. Sarah Said",
+      name: "Dr. Ahmed Salah",
       specialty: "Pediatrician",
-      imageUrl: 'assets/doc2.png',
+      imageUrl: 'assets/doctor03.jpeg',
       rating: 4.5,
-      location: "5km away",
+      location: "5km ",
     ),
     Doctor(
-      name: "Dr. John Doe",
+      name: "Dr. Ahmed Aziz ",
       specialty: "Orthopedic Surgeon",
-      imageUrl: 'assets/doc3.png',
+      imageUrl: 'assets/doctor04.jpeg',
       rating: 4.8,
-      location: "3km away",
+      location: "3km ",
     ),
     // Add more doctors as needed
   ];
@@ -29,7 +29,7 @@ class TopDoctor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 280,
+      height: 240,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: doctors.length,
@@ -50,8 +50,8 @@ class DoctorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(10),
-      width: 170,
-      height: 170,
+      width: 150,
+      height: 160,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -63,17 +63,17 @@ class DoctorCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              height: 120,
+              height: 80,
               width: 120,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   image: AssetImage(doctor.imageUrl),
-                 // fit: BoxFit.cover,
+                
                 ),
               ),
             ),
-            const SizedBox(height: 15),
+            const SizedBox(height: 20),
             Text(
               doctor.name,
               style: const TextStyle(
@@ -86,7 +86,7 @@ class DoctorCard extends StatelessWidget {
               doctor.specialty,
               style: const TextStyle(fontSize: 12),
             ),
-            const SizedBox(height: 18),
+            const SizedBox(height: 25),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

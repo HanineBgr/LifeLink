@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:glumate_flutter/data/models/article_model.dart';
+import 'package:glumate_flutter/presentation/Articles/Articles.dart';
 import 'package:glumate_flutter/presentation/Design/Round_Button.dart';
 import 'package:glumate_flutter/presentation/Design/colors.dart';
 import 'package:glumate_flutter/presentation/Design/styles/colors.dart';
 import 'package:glumate_flutter/presentation/Design/styles/styles.dart';
 import 'package:glumate_flutter/presentation/TopDoctor.dart';
 import 'package:lottie/lottie.dart';
-
-
 
 class HomeTab extends StatelessWidget {
   final void Function() onPressedScheduleCard;
@@ -20,43 +20,30 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
     double screenWidth = MediaQuery.of(context).size.width;
-final List<Doctor> doctors = [
-  Doctor(
-    name: 'Dr. Ahmed Sala',
-    specialty: 'Cardiologist',
-    imageUrl: 'assets/images/doctor1.jpg',
-    rating: 4.7,
-    location: '800m ',
-  ),
-  Doctor(
-    name: 'Dr. Sarah Smith',
-    specialty: 'Neurologist',
-    imageUrl: 'assets/images/doctor2.jpg',
-    rating: 4.9,
-    location: '1.2km ',
-  ),
-  Doctor(
-    name: 'Dr. Michael Lee',
-    specialty: 'Dermatologist',
-    imageUrl: 'assets/images/doctor3.jpg',
-    rating: 4.6,
-    location: '1.5km ',
-  ),
-  Doctor(
-    name: 'Dr. Emily Johnson',
-    specialty: 'Pediatrician',
-    imageUrl: 'assets/images/doctor4.jpg',
-    rating: 4.8,
-    location: '2km ',
-  ),
-  Doctor(
-    name: 'Dr. James Brown',
-    specialty: 'Orthopedic Surgeon',
-    imageUrl: 'assets/images/doctor5.jpg',
-    rating: 4.5,
-    location: '2.5km ',
-  ),
-];
+    List<ArticleModel> articles = [
+      ArticleModel(
+        imageAssetPath: 'assets/hospital.jpeg',
+        title: "Astrazeneca breaking news ! ",
+        location: "Read more",
+        date: "2024-06-20 14:30",
+        description: "Lorem ipsum dolor sit amet,consectetur adipiscing elit.",
+      ),
+      ArticleModel(
+        imageAssetPath: 'assets/hospital.jpeg',
+        title: 'Sample Article 2',
+        location: 'Sample Location 2',
+        date: '2024-06-21 15:45',
+        description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      ),
+      ArticleModel(
+        imageAssetPath: 'assets/hospital.jpeg',
+        title: 'Sample Article 3',
+        location: 'Sample Location 3',
+        date: '2024-06-22 12:00',
+        description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
+      ),
+    ];
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Container(
@@ -74,110 +61,177 @@ final List<Doctor> doctors = [
           padding: EdgeInsets.symmetric(horizontal: 18),
           child: ListView(
             children: [
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 20),
               UserIntro(),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 20),
               SearchInput(),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 20),
               CategoryIcons(),
-             
-              SizedBox(
-                height: 20,
-              ),
-                ClipRRect(
-              borderRadius: BorderRadius.circular(40),
-              child: Stack(
-                children: [
-                  Container(
-                    height:140,
-                    width: screenWidth,             
-                    decoration: BoxDecoration(
+              SizedBox(height: 20),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(40),
+                child: Stack(
+                  children: [
+                    Container(
+                      height: 140,
+                      width: screenWidth,
+                      decoration: BoxDecoration(
                         color: Color.fromARGB(255, 205, 229, 249),
-                        //border: Border.all(color: Colors.indigo.shade300)
-                        ),
-                  ),
-                  Positioned(
-                    height: 160,
-                    right: -60,
-                    bottom: -22,
-                    child: Lottie.asset('assets/Lottie/yoga.json'),
-                  ),
-                  Positioned.fill(
-                    top: 15,
-                    left: 25,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Early protection for \nyour family health!",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                      ),
+                    ),
+                    Positioned(
+                      height: 180,
+                      right: -15,
+                      bottom: -10,
+                      child: Lottie.asset('assets/Lottie/doc.json'),
+                    ),
+                    Positioned.fill(
+                      top: 15,
+                      left: 25,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Early protection for \nyour family health!",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        
-                        SizedBox(
-                          width: 140,
-                          child: FilledButton(
+                          const SizedBox(height: 8),
+                          SizedBox(
+                            width: 140,
+                            child: FilledButton(
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
                                 foregroundColor: Colors.indigo,
                               ),
-                              onPressed: () {
-
-                              },
-                              child: const Text("START")),
-                        ),
-                        const Spacer(),
-                      ],
+                              onPressed: () {},
+                              child: const Text("START"),
+                            ),
+                          ),
+                          const Spacer(),
+                        ],
+                      ),
                     ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Top Doctor',
+                    style: TextStyle(
+                      color: Color(MyColors.header01),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  TextButton(
+                    child: Text(
+                      'See All',
+                      style: TextStyle(
+                        color: Color(MyColors.blue),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () {},
                   ),
                 ],
               ),
-            ),
-              SizedBox(
-              height:10,
+              TopDoctor(),
+              SizedBox(height: 20),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: articles.length,
+                itemBuilder: (context, index) {
+                  return ArticlesCard(articleModel: articles[index]);
+                },
               ),
-                 Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              SizedBox(height: 20),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ArticlesCard extends StatelessWidget {
+  final ArticleModel articleModel;
+
+  const ArticlesCard({
+    required this.articleModel,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 90,
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        color: Colors.white,
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.asset(
+              articleModel.imageAssetPath,
+              fit: BoxFit.cover,
+              width: 60,
+              height: double.infinity,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Top Doctor',
-                  style: TextStyle(
-                    color: Color(MyColors.header01),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                  articleModel.title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
                   ),
                 ),
-                TextButton(
-                  child: Text(
-                    'See All',
-                    style: TextStyle(
-                      color: Color(MyColors.blue),
-                      fontWeight: FontWeight.bold,
+                const SizedBox(height: 4),
+                Flexible(
+                  child: Container(
+                    child: Text(
+                      articleModel.description,
+                      style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 12,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  onPressed: () {},
+                ),
+                const Spacer(),
+                Text(
+                  articleModel.location,
+                  style: const TextStyle(
+                    color: Colors.blueGrey,
+                    fontSize: 10,
+                  ),
                 ),
               ],
             ),
-           
-            TopDoctor(),
-          ],
-        ),
+          ),
+        ],
       ),
-    ));
+    );
   }
-
-
 }
 
 class AppointmentCard extends StatelessWidget {

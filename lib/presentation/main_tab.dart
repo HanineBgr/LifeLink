@@ -33,7 +33,7 @@ class _MainTabViewState extends State<MainTabView> {
           HomeView(),
           MyChatUI(),
           ScheduleTab(),
-          ProfileView(context: context,),  
+          ProfileView(),  
         ],
         onPageChanged: (index) {
           setState(() {

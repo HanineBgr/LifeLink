@@ -1,99 +1,87 @@
 import 'package:flutter/material.dart';
-import 'package:glumate_flutter/core/localization/appLocalization.dart';
-import 'package:glumate_flutter/presentation/pages/EditProfilePage.dart';
-import 'package:glumate_flutter/presentation/pages/login_page.dart';
-import 'package:glumate_flutter/presentation/providers/register_auth_provider.dart';
+import 'package:glumate_flutter/presentation/Appointment.dart';
 import 'package:glumate_flutter/presentation/Design/Round_Button.dart';
 import 'package:glumate_flutter/presentation/Design/colors.dart';
 import 'package:glumate_flutter/presentation/Design/title_subtitle.dart';
 import 'package:glumate_flutter/presentation/Notification/SettingRow.dart';
-import 'package:glumate_flutter/presentation/Register/role_widget.dart';
-import 'package:glumate_flutter/presentation/Profile/contactUs.dart';
-import 'package:provider/provider.dart';
+import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 
 class ProfileView extends StatefulWidget {
-    final BuildContext context;
-
-  const ProfileView({Key? key, required this.context}) : super(key: key);
+  const ProfileView({super.key});
 
   @override
   State<ProfileView> createState() => _ProfileViewState();
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  @override
-  void initState() {
-    super.initState();
-    Provider.of<RegisterAuthProvider>(context, listen: false).eitherFailureOrConnectedCachedUser();
-  }
-
   bool positive = false;
 
   List accountArr = [
-    {"image": "assets/p_personal.png", "name": "Personal Data", "tag": "1", "route": EditProfilePage()},
-    {"image": "assets/p_achi.png", "name": "Achievement", "tag": "2", "route": roleWidget()},
-    {"image": "assets/p_workout.png", "name": "Activity History", "tag": "3", "route": null},
+    {"image": "assets/p_personal.png", "name": "Personal Data", "tag": "1"},
+    {"image": "assets/p_achi.png", "name": "Achievement", "tag": "2"},
+    {
+      "image": "assets/p_activity.png",
+      "name": "Activity History",
+      "tag": "3"
+    },
+    {
+      "image": "assets/p_workout.png",
+      "name": "Workout Progress",
+      "tag": "4"
+    }
   ];
 
- List otherArr(BuildContext context) => [
-  {"image": "assets/p_contact.png", "name":AppLocalization.of(context).translate('contact')!, "tag": "5", "route": ContactUsScreen()},
-  {
-    "image": "assets/p_privacy.png",
-    "name": AppLocalization.of(context).translate('privacy')!,
-    "tag": "6",
-    "onTap": () {
-      _showPrivacyDialog(context);
-    },
-  },
-];
-
-
-  String calculateAge(DateTime? birthDate) {
-    if (birthDate == null) return 
-    AppLocalization.of(context).translate('unknown')!;
-
-    DateTime currentDate = DateTime.now();
-    int age = currentDate.year - birthDate.year;
-
-    if (currentDate.month < birthDate.month || (currentDate.month == birthDate.month && currentDate.day < birthDate.day)) {
-      age--;
-    }
-
-    return age >= 0 ? age.toString() :AppLocalization.of(context).translate('unknown')!;
-;
-  }
-
-  
-
+  List otherArr = [
+    {"image": "assets/p_contact.png", "name": "Contact Us", "tag": "5"},
+    {"image": "assets/p_privacy.png", "name": "Privacy Policy", "tag": "6"},
+    {"image": "assets/p_setting.png", "name": "Settings", "tag": "7"},
+  ];
+/*
+return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color.fromARGB(255, 213, 235, 255),
+              Color.fromARGB(255, 248, 244, 246),
+            ],
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 25, top: 40, right: 25),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                'Schedule',
+                textAlign: TextAlign.start,
+                style: kTitleStyle,
+                
+              ),*/ 
   @override
   Widget build(BuildContext context) {
-    var cachedUser = Provider.of<RegisterAuthProvider>(context, listen: false).cachedUser;
-    String userAge = calculateAge(cachedUser != null ? DateTime.parse(cachedUser.dateOfBirth ?? '') : null);
-  // String profileImage = getProfileImage(cachedUser != null ? cachedUser.gender : null);
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: TColor.white,
         centerTitle: true,
         elevation: 0,
-       automaticallyImplyLeading: false,
-
         leadingWidth: 0,
         title: Text(
           "Profile",
           style: TextStyle(
-            color: TColor.black,
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-          ),
+              color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
         ),
         actions: [
           InkWell(
             onTap: () {
-              Provider.of<RegisterAuthProvider>(context, listen: false).eitherFailureOrLogout();
-              if (Provider.of<RegisterAuthProvider>(context, listen: false).errorLogoutMessage.isEmpty) {
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
-              }
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AppointmentScreen(),
+                ),
+              );
             },
             child: Container(
               margin: const EdgeInsets.all(8),
@@ -101,28 +89,31 @@ class _ProfileViewState extends State<ProfileView> {
               width: 40,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: TColor.lightGray,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: IconButton(
-                icon: Icon(
-                  Icons.logout,
-                  color: Colors.black,
-                ),
-                onPressed: () {
-                  Provider.of<RegisterAuthProvider>(context, listen: false).eitherFailureOrLogout();
-                  if (Provider.of<RegisterAuthProvider>(context, listen: false).errorLogoutMessage.isEmpty) {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
-                  }
-                },
+                  color: TColor.lightGray,
+                  borderRadius: BorderRadius.circular(10)),
+              child: Image.asset(
+                "assets/logout.png",
+                width: 30,
+                height: 25,
+                fit: BoxFit.contain,
               ),
             ),
-          ),
+          )
         ],
       ),
       backgroundColor: TColor.white,
       body: SingleChildScrollView(
         child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color.fromARGB(255, 213, 235, 255),
+                Color.fromARGB(255, 248, 244, 246),
+              ],
+            ),
+          ),
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -132,7 +123,7 @@ class _ProfileViewState extends State<ProfileView> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(30),
                     child: Image.asset(
-                      "assets/avatarMale.PNG",
+                      "assets/u2.png",
                       width: 50,
                       height: 50,
                       fit: BoxFit.cover,
@@ -146,7 +137,7 @@ class _ProfileViewState extends State<ProfileView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Ahmed Salah",
+                          "Stefani Wong",
                           style: TextStyle(
                             color: TColor.black,
                             fontSize: 14,
@@ -154,7 +145,7 @@ class _ProfileViewState extends State<ProfileView> {
                           ),
                         ),
                         Text(
-                          "Patient",
+                          "Lose a Fat Program",
                           style: TextStyle(
                             color: TColor.gray,
                             fontSize: 12,
@@ -164,20 +155,20 @@ class _ProfileViewState extends State<ProfileView> {
                     ),
                   ),
                   SizedBox(
-                    width: 79,
+                    width: 70,
                     height: 25,
                     child: RoundButton(
-                      title: AppLocalization.of(context).translate('edit')!,
+                      title: "Edit",
                       type: RoundButtonType.bgGradient,
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EditProfilePage(),
-                          ),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => const ActivityTrackerView(),
+                        //   ),
+                        // );
                       },
                     ),
                   )
@@ -186,7 +177,7 @@ class _ProfileViewState extends State<ProfileView> {
               const SizedBox(
                 height: 15,
               ),
-              Row(
+              const Row(
                 children: [
                   Expanded(
                     child: TitleSubtitleCell(
@@ -208,7 +199,7 @@ class _ProfileViewState extends State<ProfileView> {
                   ),
                   Expanded(
                     child: TitleSubtitleCell(
-                      title: userAge,
+                      title: "22yo",
                       subtitle: "Age",
                     ),
                   ),
@@ -217,267 +208,204 @@ class _ProfileViewState extends State<ProfileView> {
               const SizedBox(
                 height: 25,
               ),
-              GestureDetector(
-                onTap: () {
-                  /*  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => BluetoothDevicesView()),
-                  );*/
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  decoration: BoxDecoration(
-                    color: TColor.white,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 2)],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                      AppLocalization.of(context).translate('compte')!,
-                        style: TextStyle(
-                          color: TColor.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      for (var item in accountArr)
-                        SizedBox(
-                          height: 30,
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => item["route"],
-                                ),
-                              );
-                            },
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  item["image"],
-                                  height: 15,
-                                  width: 15,
-                                  fit: BoxFit.contain,
-                                ),
-                                const SizedBox(
-                                  width: 15,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    item["name"],
-                                    style: TextStyle(
-                                      color: TColor.black,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
+            Container(
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                decoration: BoxDecoration(
+                  color: TColor.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: const [
+                    BoxShadow(color: Colors.black12, blurRadius: 2)
+                  ],
                 ),
-              ),
-              SizedBox(height: 25,),
-              GestureDetector(
-                onTap: () {
-                  /*  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => BluetoothDevicesView()),
-                  );*/
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  decoration: BoxDecoration(
-                    color: TColor.white,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 2)],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Bluetooth",
-                        style: TextStyle(
-                          color: TColor.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                        ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Account",
+                      style: TextStyle(
+                        color: TColor.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
                       ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      SizedBox(
-                        height: 30,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              "assets/bluetooth.png",
-                              height: 15,
-                              width: 15,
-                              fit: BoxFit.contain,
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            Expanded(
-                              child: Text(
-                                "Bluetooth Devices",
-                                style: TextStyle(
-                                  color: TColor.black,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      itemCount: accountArr.length,
+                      itemBuilder: (context, index) {
+                        var iObj = accountArr[index] as Map? ?? {};
+                        return SettingRow(
+                          icon: iObj["image"].toString(),
+                          title: iObj["name"].toString(),
+                          onPressed: () {},
+                        );
+                      },
+                    )
+                  ],
                 ),
               ),
               const SizedBox(
                 height: 25,
               ),
-              GestureDetector(
-                onTap: () {
-                  /*  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => BluetoothDevicesView()),
-                  );*/
-                },
-                child:
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  decoration: BoxDecoration(
-                    color: TColor.white,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 2)],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                          AppLocalization.of(context).translate('other')!,                
-                          style: TextStyle(
-                          color: TColor.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                        ),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                decoration: BoxDecoration(
+                  color: TColor.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: const [
+                    BoxShadow(color: Colors.black12, blurRadius: 2)
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Notification",
+                      style: TextStyle(
+                        color: TColor.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
                       ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-
-                      for (var item in otherArr(context))
-                        SizedBox(
-                          height: 30,
-                          child: GestureDetector(
-                            onTap: () {
-                              if (item['name'] == AppLocalization.of(context).translate('privacy')!               
-) {
-                                item['onTap']();
-                              } else {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => item["route"],
-                                  ),
-                                );
-                              }
-                            },
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  item["image"],
-                                  height: 15,
-                                  width: 15,
-                                  fit: BoxFit.contain,
-                                ),
-                                const SizedBox(
-                                  width: 15,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    item["name"],
-                                    style: TextStyle(
-                                      color: TColor.black,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    SizedBox(
+                      height: 30,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            "assets/p_notification.png",
+                            height: 15,
+                            width: 15,
+                            fit: BoxFit.contain,
+                          ),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          Expanded(
+                            child: Text(
+                              "Pop-up Notification",
+                              style: TextStyle(
+                                color: TColor.black,
+                                fontSize: 12,
+                              ),
                             ),
                           ),
-                        ),
-                    ],
-                  ),
+                          CustomAnimatedToggleSwitch<bool>(
+                            current: positive,
+                            values: [false, true],
+                            indicatorSize: Size.square(30.0),
+                            animationDuration: const Duration(milliseconds: 200),
+                            animationCurve: Curves.linear,
+                            onChanged: (b) => setState(() => positive = b),
+                            iconBuilder: (context, local, global) {
+                              return const SizedBox();
+                            },
+                            iconsTappable: false,
+                            wrapperBuilder: (context, global, child) {
+                              return Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Positioned(
+                                    left: 10.0,
+                                    right: 10.0,
+                                    height: 30.0,
+                                    child: DecoratedBox(
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          colors: TColor.secondaryG,
+                                        ),
+                                        borderRadius: const BorderRadius.all(
+                                          Radius.circular(50.0),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  child,
+                                ],
+                              );
+                            },
+                            foregroundIndicatorBuilder: (context, global) {
+                              return SizedBox.fromSize(
+                                size: const Size(10, 10),
+                                child: DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    color: TColor.white,
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(50.0),
+                                    ),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.black38,
+                                        spreadRadius: 0.05,
+                                        blurRadius: 1.1,
+                                        offset: Offset(0.0, 0.8),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                decoration: BoxDecoration(
+                  color: TColor.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: const [
+                    BoxShadow(color: Colors.black12, blurRadius: 2)
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Other",
+                      style: TextStyle(
+                        color: TColor.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      itemCount: otherArr.length,
+                      itemBuilder: (context, index) {
+                        var iObj = otherArr[index] as Map? ?? {};
+                        return SettingRow(
+                          icon: iObj["image"].toString(),
+                          title: iObj["name"].toString(),
+                          onPressed: () {},
+                        );
+                      },
+                    )
+                  ],
                 ),
               ),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  void _showPrivacyDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(AppLocalization.of(context).translate('privacy')!,                
-),
-          content: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  AppLocalization.of(context).translate('privacy_importance')!,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.justify,
-                ),
-                SizedBox(height: 8.0),
-                Text(
-                    AppLocalization.of(context).translate('collect')!,
-                      textAlign: TextAlign.justify,
-
-                ),
-                SizedBox(height: 16.0),
-                Text(
-                AppLocalization.of(context).translate('agree')!,
-                  style: TextStyle(fontStyle: FontStyle.italic),
-                  textAlign: TextAlign.justify,
-
-                ),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text(               
-                 AppLocalization.of(context).translate('close')!,
-                ),
-            ),
-          ],
-        );
-      },
     );
   }
 }
