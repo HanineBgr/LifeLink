@@ -89,7 +89,7 @@ class _registerForm1State extends State<registerForm1> {
     return Consumer<RegisterAuthProvider>(
       builder: (context, registerProvider, _) {
         return Scaffold(
-          backgroundColor: Colors.transparent, // Transparent scaffold background
+          backgroundColor: Colors.transparent, 
           body: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -111,7 +111,7 @@ class _registerForm1State extends State<registerForm1> {
                     right: 28,
                     bottom: MediaQuery.of(context).viewInsets.bottom + 20,
                   ),
-                  height: MediaQuery.of(context).size.height, // Adjusted height
+                  height: MediaQuery.of(context).size.height, 
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [

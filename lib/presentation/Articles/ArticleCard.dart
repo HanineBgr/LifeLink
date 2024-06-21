@@ -60,7 +60,6 @@ class ArticlesCard extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    // Define the action for "Read More"
                   },
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:glumate_flutter/presentation/Appointment.dart';
 import 'package:glumate_flutter/presentation/Design/Round_Button.dart';
 import 'package:glumate_flutter/presentation/Design/colors.dart';
+import 'package:glumate_flutter/presentation/Design/styles/colors.dart';
+import 'package:glumate_flutter/presentation/Design/styles/styles.dart';
 import 'package:glumate_flutter/presentation/Design/title_subtitle.dart';
 import 'package:glumate_flutter/presentation/Notification/SettingRow.dart';
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 
 class ProfileView extends StatefulWidget {
-  const ProfileView({super.key});
+  const ProfileView({Key? key}) : super(key: key);
 
   @override
   State<ProfileView> createState() => _ProfileViewState();
@@ -19,16 +21,8 @@ class _ProfileViewState extends State<ProfileView> {
   List accountArr = [
     {"image": "assets/p_personal.png", "name": "Personal Data", "tag": "1"},
     {"image": "assets/p_achi.png", "name": "Achievement", "tag": "2"},
-    {
-      "image": "assets/p_activity.png",
-      "name": "Activity History",
-      "tag": "3"
-    },
-    {
-      "image": "assets/p_workout.png",
-      "name": "Workout Progress",
-      "tag": "4"
-    }
+    {"image": "assets/p_activity.png", "name": "Activity History", "tag": "3"},
+    {"image": "assets/p_workout.png", "name": "Workout Progress", "tag": "4"}
   ];
 
   List otherArr = [
@@ -36,94 +30,44 @@ class _ProfileViewState extends State<ProfileView> {
     {"image": "assets/p_privacy.png", "name": "Privacy Policy", "tag": "6"},
     {"image": "assets/p_setting.png", "name": "Settings", "tag": "7"},
   ];
-/*
-return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color.fromARGB(255, 213, 235, 255),
-              Color.fromARGB(255, 248, 244, 246),
-            ],
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 25, top: 40, right: 25),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                'Schedule',
-                textAlign: TextAlign.start,
-                style: kTitleStyle,
-                
-              ),*/ 
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: TColor.white,
-        centerTitle: true,
-        elevation: 0,
-        leadingWidth: 0,
-        title: Text(
-          "Profile",
-          style: TextStyle(
-              color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color.fromARGB(255, 213, 235, 255),
+            Color.fromARGB(255, 248, 244, 246),
+          ],
         ),
-        actions: [
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const AppointmentScreen(),
-                ),
-              );
-            },
-            child: Container(
-              margin: const EdgeInsets.all(8),
-              height: 40,
-              width: 40,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: TColor.lightGray,
-                  borderRadius: BorderRadius.circular(10)),
-              child: Image.asset(
-                "assets/logout.png",
-                width: 30,
-                height: 25,
-                fit: BoxFit.contain,
-              ),
-            ),
-          )
-        ],
       ),
-      backgroundColor: TColor.white,
-      body: SingleChildScrollView(
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color.fromARGB(255, 213, 235, 255),
-                Color.fromARGB(255, 248, 244, 246),
-              ],
-            ),
-          ),
-          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(30, 50, 30, 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Center(
+                  child: Text(
+                  'Profile',
+                  textAlign: TextAlign.start,
+                  style: kTitleStyle,
+                
+              ),
+                ),
+              ),
               Row(
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(30),
                     child: Image.asset(
-                      "assets/u2.png",
+                      "assets/person.jpeg",
                       width: 50,
                       height: 50,
                       fit: BoxFit.cover,
@@ -137,7 +81,7 @@ return Scaffold(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Stefani Wong",
+                          "Hanine Bouguerra",
                           style: TextStyle(
                             color: TColor.black,
                             fontSize: 14,
@@ -145,7 +89,7 @@ return Scaffold(
                           ),
                         ),
                         Text(
-                          "Lose a Fat Program",
+                          "Patiente",
                           style: TextStyle(
                             color: TColor.gray,
                             fontSize: 12,
@@ -163,12 +107,12 @@ return Scaffold(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
                       onPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => const ActivityTrackerView(),
-                        //   ),
-                        // );
+                         Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AppointmentScreen(),
+                          ),
+                        );
                       },
                     ),
                   )
@@ -208,7 +152,7 @@ return Scaffold(
               const SizedBox(
                 height: 25,
               ),
-            Container(
+              Container(
                 padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                 decoration: BoxDecoration(
                   color: TColor.white,
@@ -400,6 +344,29 @@ return Scaffold(
                       },
                     )
                   ],
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: TextButton.icon(
+                  onPressed: () {
+                    // Add logout functionality here
+                  },
+                  icon: Icon(
+                    Icons.logout,
+                    color: Color(MyColors.background),
+                  ),
+                  label: Text(
+                    "Logout",
+                    style: TextStyle(
+                      color: Color(MyColors.background),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
               ),
             ],

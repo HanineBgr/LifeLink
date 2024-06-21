@@ -5,6 +5,7 @@ import 'package:glumate_flutter/presentation/Design/Round_Button.dart';
 import 'package:glumate_flutter/presentation/Design/colors.dart';
 import 'package:glumate_flutter/presentation/Design/styles/colors.dart';
 import 'package:glumate_flutter/presentation/Design/styles/styles.dart';
+import 'package:glumate_flutter/presentation/Notification/notificationView.dart';
 import 'package:glumate_flutter/presentation/TopDoctor.dart';
 import 'package:lottie/lottie.dart';
 
@@ -123,7 +124,7 @@ class HomeTab extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Top Doctor',
+                    'Top doctors',
                     style: TextStyle(
                       color: Color(MyColors.header01),
                       fontWeight: FontWeight.bold,
@@ -144,6 +145,29 @@ class HomeTab extends StatelessWidget {
               ),
               TopDoctor(),
               SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Health articles',
+                    style: TextStyle(
+                      color: Color(MyColors.header01),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  TextButton(
+                    child: Text(
+                      'See All',
+                      style: TextStyle(
+                        color: Color(MyColors.blue),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
               ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
@@ -161,6 +185,7 @@ class HomeTab extends StatelessWidget {
   }
 }
 
+
 class ArticlesCard extends StatelessWidget {
   final ArticleModel articleModel;
 
@@ -174,58 +199,78 @@ class ArticlesCard extends StatelessWidget {
     return Container(
       height: 90,
       margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         color: Colors.white,
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              articleModel.imageAssetPath,
-              fit: BoxFit.cover,
-              width: 60,
-              height: double.infinity,
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  articleModel.title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.asset(
+                  articleModel.imageAssetPath,
+                  fit: BoxFit.cover,
+                  width: 60,
+                  height: double.infinity,
                 ),
-                const SizedBox(height: 4),
-                Flexible(
-                  child: Container(
-                    child: Text(
-                      articleModel.description,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      articleModel.title,
                       style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
                       ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
                     ),
-                  ),
+                    const SizedBox(height: 4),
+                    Flexible(
+                      child: Container(
+                        child: Text(
+                          articleModel.description,
+                          style: const TextStyle(
+                            color: Colors.grey,
+                            fontSize: 12,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ),
+                    const Spacer(),
+                    Text(
+                      articleModel.location,
+                      style: const TextStyle(
+                        color: Colors.blueGrey,
+                        fontSize: 10,
+                      ),
+                    ),
+                  ],
                 ),
-                const Spacer(),
-                Text(
-                  articleModel.location,
-                  style: const TextStyle(
-                    color: Colors.blueGrey,
-                    fontSize: 10,
-                  ),
-                ),
-              ],
+              ),
+            ],
+          ),
+          Positioned(
+            top: 0,
+            right: 0,
+            child: GestureDetector(
+              onTap: () {
+                // Handle save icon click
+                // Implement your save logic here
+                print('Save icon clicked');
+              },
+              child: Icon(
+                Icons.bookmark,
+                color: Color(MyColors.background), 
+                size: 20,
+              ),
             ),
           ),
         ],
@@ -518,9 +563,24 @@ class UserIntro extends StatelessWidget {
             ),
           ],
         ),
-        const CircleAvatar(
-          backgroundImage: AssetImage('assets/person.jpeg'),
-        )
+     GestureDetector(
+                   onTap: () {
+                        Navigator.push(
+                        context,
+                         MaterialPageRoute(
+                            builder: (context) => const NotificationView(),
+                      ),
+                       );
+  },
+  child: Image.asset(
+    'assets/p_notification.png',
+    width: 22,
+    height:30,
+    //fit: BoxFit.cover,
+  ),
+)
+
+
       ],
     );
   }

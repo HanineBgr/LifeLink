@@ -23,7 +23,6 @@ class TopDoctor extends StatelessWidget {
       rating: 4.8,
       location: "3km ",
     ),
-    // Add more doctors as needed
   ];
 
   @override

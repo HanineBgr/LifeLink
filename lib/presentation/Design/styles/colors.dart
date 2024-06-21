@@ -1,5 +1,6 @@
 class MyColors {
   static int header01 = 0xff151a56;
+  static int bl = 0xff99C3E9E9;
   static int primary = 0xff575de3;
   static int btnColor = 0xffE3F0F9;
   static int background= 0xff4C8BAF;
