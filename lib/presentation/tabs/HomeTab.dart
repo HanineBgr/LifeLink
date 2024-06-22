@@ -6,7 +6,7 @@ import 'package:glumate_flutter/presentation/Design/colors.dart';
 import 'package:glumate_flutter/presentation/Design/styles/colors.dart';
 import 'package:glumate_flutter/presentation/Design/styles/styles.dart';
 import 'package:glumate_flutter/presentation/Notification/notificationView.dart';
-import 'package:glumate_flutter/presentation/TopDoctor.dart';
+import 'package:glumate_flutter/presentation/Doctor/TopDoctor.dart';
 import 'package:lottie/lottie.dart';
 
 class HomeTab extends StatelessWidget {

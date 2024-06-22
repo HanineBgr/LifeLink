@@ -7,6 +7,7 @@ import 'package:glumate_flutter/presentation/Design/styles/styles.dart';
 import 'package:glumate_flutter/presentation/Design/title_subtitle.dart';
 import 'package:glumate_flutter/presentation/Notification/SettingRow.dart';
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
+import 'package:glumate_flutter/presentation/pages/EditProfilePage.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({Key? key}) : super(key: key);
@@ -110,7 +111,7 @@ class _ProfileViewState extends State<ProfileView> {
                          Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const DoctorDetailScreen(),
+                            builder: (context) => const EditProfilePage(),
                           ),
                         );
                       },

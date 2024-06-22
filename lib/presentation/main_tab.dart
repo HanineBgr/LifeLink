@@ -1,19 +1,21 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:glumate_flutter/presentation/Chat/chat_widget.dart';
+import 'package:glumate_flutter/presentation/Notification/notificationView.dart';
 import 'package:glumate_flutter/presentation/Profile/profile.dart';
+import 'package:glumate_flutter/presentation/home_view.dart';
+import 'package:glumate_flutter/presentation/tabs/HomeTab.dart';
 import 'package:glumate_flutter/presentation/tabs/ScheduleTab.dart';
-import 'home_view.dart';
 
 class MainTabView extends StatefulWidget {
-  const MainTabView({Key? key}) : super(key: key);
+  const MainTabView({super.key});
 
   @override
   State<MainTabView> createState() => _MainTabViewState();
 }
 
 class _MainTabViewState extends State<MainTabView> {
-  int _selectedIndex = 0;
+  int _page = 0;
   final PageController _pageController = PageController();
 
   @override
@@ -26,59 +28,40 @@ class _MainTabViewState extends State<MainTabView> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      backgroundColor: Colors.white,
-      body: PageView(
-        controller: _pageController,
-        children: [
-          HomeView(),
-          MyChatUI(),
-          ScheduleTab(),
-          ProfileView(),  
+      bottomNavigationBar: CurvedNavigationBar(
+        height: 50,
+        backgroundColor: Colors.transparent,
+        buttonBackgroundColor: Color.fromARGB(255, 205, 229, 249),
+        color: Color.fromARGB(255, 205, 229, 249),
+        animationDuration: const Duration(milliseconds: 300),
+        index: _page,
+        items: const <Widget>[
+          Icon(Icons.home, size: 30, color: Colors.white),
+          Icon(Icons.message, size: 30, color: Colors.white),
+          Icon(Icons.calendar_month, size: 30, color: Colors.white),
+          Icon(Icons.person, size: 30, color: Colors.white),
         ],
-        onPageChanged: (index) {
+        onTap: (index) {
           setState(() {
-            _selectedIndex = index;
+            _page = index;
+            _pageController.jumpToPage(index);
           });
         },
       ),
-      bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30.0),
-          topRight: Radius.circular(30.0),
-        ),
-        child: _buildBottomNavigationBar(),
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (index) {
+          setState(() {
+            _page = index;
+          });
+        },
+        children: const <Widget>[
+          HomeView(),
+          MyChatUI(),
+          ScheduleTab(),
+          ProfileView(),
+        ],
       ),
-    );
-  }
-
-  Widget _buildBottomNavigationBar() {
-    return CustomNavigationBar(
-      iconSize: 30.0,
-      selectedColor: Color.fromARGB(255, 141, 108, 240),
-      strokeColor: Color(0x30040307),
-      unSelectedColor: Color(0xffacacac),
-      backgroundColor: Colors.white,
-      items: [
-        CustomNavigationBarItem(
-          icon: Icon(Icons.home),
-        ),
-        CustomNavigationBarItem(
-          icon: Icon(Icons.chat),
-        ),
-        CustomNavigationBarItem(
-          icon: Icon(Icons.calendar_month),
-        ),
-        CustomNavigationBarItem(
-          icon: Icon(Icons.account_circle),
-        ),
-      ],
-      currentIndex: _selectedIndex,
-      onTap: (index) {
-        setState(() {
-          _selectedIndex = index;
-          _pageController.jumpToPage(index); 
-        });
-      },
     );
   }
 }

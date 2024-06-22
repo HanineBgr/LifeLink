@@ -33,133 +33,149 @@ class _EditProfileState extends State<EditProfile> {
       RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 
   @override
-Widget build(BuildContext context) {
-  return Consumer<RegisterAuthProvider>(
-    builder: (context, registerProvider, _) {
-      final cachedUser = registerProvider.cachedUser;
+  Widget build(BuildContext context) {
+    return Consumer<RegisterAuthProvider>(
+      builder: (context, registerProvider, _) {
+        final cachedUser = registerProvider.cachedUser;
 
-
-        return Form(
-          key: _formKey,
-          child: SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.only(
-                top: 0,
-                left: 28,
-                right: 28,
+        return Scaffold(
+         backgroundColor: Colors.transparent, 
+          body: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color.fromARGB(255, 213, 235, 255),
+                  Color.fromARGB(255, 248, 244, 246),
+                ],
               ),
-              child: Column(
-                children: [
-                  Image.asset(
-                    "assets/profile.png",
-                    height: 250,
-                    width: 460,
+            ),
+            child: Form(
+              key: _formKey,
+              child: SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.only(
+                    top: 0,
+                    left: 28,
+                    right: 28,
                   ),
-                  CustomTextFormField(
-                    label: AppLocalization.of(context).translate('first_name')!,
-                    controller: widget.controllerName,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return AppLocalization.of(context)
-                            .translate('first_name_empty')!;
-                      } else {
-                        if (value.length < 3) {
-                          return AppLocalization.of(context)
-                              .translate('first_name_error')!;
-                        }
-                      }
-                      return null;
-                    },
-                    icon: Icons.person,
-                  ),
-                  const SizedBox(height: 18),
-                  CustomTextFormField(
-                    label: AppLocalization.of(context).translate('last_name')!,
-                    controller: widget.controllerLastName,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return AppLocalization.of(context)
-                            .translate('last_name_empty')!;
-                      } else {
-                        if (value.length < 3) {
-                          return AppLocalization.of(context)
-                              .translate('last_name_error')!;
-                        }
-                      }
-                      return null;
-                    },
-                    icon: Icons.person,
-                  ),
-                  const SizedBox(height: 18),
-                  CustomTextFormField(
-                    label: AppLocalization.of(context).translate('email')!,
-                    controller: widget.controllerEmail,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return AppLocalization.of(context)
-                            .translate('email_empty')!;
-                      } else {
-                        if (!_emailRegex.hasMatch(value)) {
-                          return AppLocalization.of(context)
-                              .translate('email_error')!;
-                        }
-                      }
-                      return null;
-                    },
-                    icon: Icons.email,
-                  ),
-                  const SizedBox(height: 20),
-                  SizedBox(height: 5),
-                  Row(
+                  child: Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 12.0),
-                        child: Icon(
-                          Icons.calendar_today,
-                          color: Color.fromARGB(255, 118, 183, 221),
-                        ),
+                      Image.asset(
+                        "assets/profile.png",
+                        height: 250,
+                        width: 460,
                       ),
-                      const SizedBox(width: 8),
-                      TextButton(
-                        onPressed: () {
-                          _selectDate(context);
+                      CustomTextFormField(
+                        label: AppLocalization.of(context)
+                            .translate('first_name')!,
+                        controller: widget.controllerName,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return AppLocalization.of(context)
+                                .translate('first_name_empty')!;
+                          } else {
+                            if (value.length < 3) {
+                              return AppLocalization.of(context)
+                                  .translate('first_name_error')!;
+                            }
+                          }
+                          return null;
                         },
-                        child: Text(
-                          AppLocalization.of(context).translate('select_DOB')!,
+                        icon: Icons.person,
+                      ),
+                      const SizedBox(height: 18),
+                      CustomTextFormField(
+                        label: AppLocalization.of(context)
+                            .translate('last_name')!,
+                        controller: widget.controllerLastName,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return AppLocalization.of(context)
+                                .translate('last_name_empty')!;
+                          } else {
+                            if (value.length < 3) {
+                              return AppLocalization.of(context)
+                                  .translate('last_name_error')!;
+                            }
+                          }
+                          return null;
+                        },
+                        icon: Icons.person,
+                      ),
+                      const SizedBox(height: 18),
+                      CustomTextFormField(
+                        label: AppLocalization.of(context)
+                            .translate('email')!,
+                        controller: widget.controllerEmail,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return AppLocalization.of(context)
+                                .translate('email_empty')!;
+                          } else {
+                            if (!_emailRegex.hasMatch(value)) {
+                              return AppLocalization.of(context)
+                                  .translate('email_error')!;
+                            }
+                          }
+                          return null;
+                        },
+                        icon: Icons.email,
+                      ),
+                      const SizedBox(height: 20),
+                      SizedBox(height: 5),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 12.0),
+                            child: Icon(
+                              Icons.calendar_today,
+                              color: Color.fromARGB(255, 118, 183, 221),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          TextButton(
+                            onPressed: () {
+                              _selectDate(context);
+                            },
+                            child: Text(
+                              AppLocalization.of(context)
+                                  .translate('select_DOB')!,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomStyledButton(
+                              () async {
+                                if (_formKey.currentState!.validate()) {
+                                  final cachedUser = registerProvider.cachedUser;
+                                  if (cachedUser != null) {
+                                    await registerProvider.eitherFailureOrUpdateUser(
+                                      id: cachedUser.id,
+                                      updatedUserData: {
+                                        'firstName': widget.controllerName.text,
+                                        'lastName': widget.controllerLastName.text,
+                                        'email': widget.controllerEmail.text,
+                                        'dob': _selectedDate,
+                                      },
+                                    );
+                                  }
+                                }
+                              },
+                              AppLocalization.of(context).translate('confirm')!,
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 10),
-                  Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomStyledButton(
- () async {
-  if (_formKey.currentState!.validate()) {
-    final cachedUser = registerProvider.cachedUser;
-    if (cachedUser != null) {
-      await registerProvider.eitherFailureOrUpdateUser(
-        id: cachedUser.id,
-        updatedUserData: {
-          'firstName': widget.controllerName.text,
-          'lastName': widget.controllerLastName.text,
-          'email': widget.controllerEmail.text,
-          'dob': _selectedDate,
-        },
-      );
-    }
-  }
-},
-
-  AppLocalization.of(context).translate('confirm')!,
-),
-
-                      ],
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
           ),
