@@ -1,6 +1,6 @@
 # LifeLink
 
-A new Flutter project.
+LifeLink is a cross plateform mobile app designed to facilitate remote health monitoring and communication between patients and healthcare providers. It allows users communicate securely with medical professionals, enhancing access to healthcare services from the convenience of a mobile device.
 
 ## Getting Started
 

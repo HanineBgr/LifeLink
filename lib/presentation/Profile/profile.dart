@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:glumate_flutter/presentation/Appointment.dart';
+import 'package:glumate_flutter/presentation/Doctor/DoctorDetail.dart';
 import 'package:glumate_flutter/presentation/Design/Round_Button.dart';
 import 'package:glumate_flutter/presentation/Design/colors.dart';
 import 'package:glumate_flutter/presentation/Design/styles/colors.dart';
@@ -110,7 +110,7 @@ class _ProfileViewState extends State<ProfileView> {
                          Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const AppointmentScreen(),
+                            builder: (context) => const DoctorDetailScreen(),
                           ),
                         );
                       },
