@@ -37,7 +37,6 @@ class _EditProfileState extends State<EditProfile> {
     return Consumer<RegisterAuthProvider>(
       builder: (context, registerProvider, _) {
         final cachedUser = registerProvider.cachedUser;
-
         return Scaffold(
          backgroundColor: Colors.transparent, 
           body: Container(

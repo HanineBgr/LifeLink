@@ -27,26 +27,25 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-         appBar: AppBar(
-            title: Text(
-                'Doctor detail',
-                textAlign: TextAlign.start,
-                style: kTitleStyle,
-                
-              ),
-            flexibleSpace: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    const Color.fromARGB(255, 210, 233, 252),
-                    const Color.fromARGB(255, 248, 244, 246),
-                  ],
-                ),
+        appBar: AppBar(
+          title: Text(
+            'Doctor detail',
+            textAlign: TextAlign.start,
+            style: kTitleStyle,
+          ),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  const Color.fromARGB(255, 210, 233, 252),
+                  const Color.fromARGB(255, 248, 244, 246),
+                ],
               ),
             ),
           ),
+        ),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -65,13 +64,13 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                       // Doctor's Image
                       ClipOval(
                         child: Image.asset(
-                          'assets/doctor02.png',
+                          'assets/doctor03.jpeg',
                           width: 100,
                           height: 100,
                           fit: BoxFit.cover,
                         ),
                       ),
-                      const SizedBox(height: 40,),
+                      const SizedBox(height: 40),
                       // Doctor's Info
                       Expanded(
                         child: Column(
@@ -219,6 +218,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                       _TimeSlot(
                         time: '09:00 AM',
                         isSelected: _selectedTime == '09:00 AM',
+                        isAvailable: true,
                         onTap: () {
                           setState(() {
                             _selectedTime = '09:00 AM';
@@ -228,24 +228,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                       _TimeSlot(
                         time: '10:00 AM',
                         isSelected: _selectedTime == '10:00 AM',
-                        onTap: () {
-                          setState(() {
-                            _selectedTime = '10:00 AM';
-                          });
-                        },
-                      ),
-                       _TimeSlot(
-                        time: '10:00 AM',
-                        isSelected: _selectedTime == '10:00 AM',
-                        onTap: () {
-                          setState(() {
-                            _selectedTime = '10:00 AM';
-                          });
-                        },
-                      ),
-                       _TimeSlot(
-                        time: '10:00 AM',
-                        isSelected: _selectedTime == '10:00 AM',
+                        isAvailable: true,
                         onTap: () {
                           setState(() {
                             _selectedTime = '10:00 AM';
@@ -255,6 +238,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                       _TimeSlot(
                         time: '11:00 AM',
                         isSelected: _selectedTime == '11:00 AM',
+                        isAvailable: true,
                         onTap: () {
                           setState(() {
                             _selectedTime = '11:00 AM';
@@ -262,8 +246,19 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                         },
                       ),
                       _TimeSlot(
+                        time: '12:00 PM',
+                        isSelected: _selectedTime == '12:00 PM',
+                        isAvailable: true,
+                        onTap: () {
+                          setState(() {
+                            _selectedTime = '12:00 PM';
+                          });
+                        },
+                      ),
+                      _TimeSlot(
                         time: '01:00 PM',
                         isSelected: _selectedTime == '01:00 PM',
+                        isAvailable: true,
                         onTap: () {
                           setState(() {
                             _selectedTime = '01:00 PM';
@@ -283,6 +278,7 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                       _TimeSlot(
                         time: '03:00 PM',
                         isSelected: _selectedTime == '03:00 PM',
+                        isAvailable: true,
                         onTap: () {
                           setState(() {
                             _selectedTime = '03:00 PM';
@@ -292,9 +288,20 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen> {
                       _TimeSlot(
                         time: '04:00 PM',
                         isSelected: _selectedTime == '04:00 PM',
+                        isAvailable: true,
                         onTap: () {
                           setState(() {
                             _selectedTime = '04:00 PM';
+                          });
+                        },
+                      ),
+                      _TimeSlot(
+                        time: '05:00 PM',
+                        isSelected: _selectedTime == '05:00 PM',
+                        isAvailable: true,
+                        onTap: () {
+                          setState(() {
+                            _selectedTime = '05:00 PM';
                           });
                         },
                       ),
@@ -400,7 +407,7 @@ class _TimeSlot extends StatelessWidget {
   const _TimeSlot({
     Key? key,
     required this.time,
-    this.isAvailable = false,
+    this.isAvailable = true,
     required this.isSelected,
     required this.onTap,
   }) : super(key: key);
@@ -408,7 +415,7 @@ class _TimeSlot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: isAvailable ? onTap : null,
+      onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(
           vertical: 10.0,
@@ -416,22 +423,18 @@ class _TimeSlot extends StatelessWidget {
         ),
         margin: const EdgeInsets.only(right: 8.0),
         decoration: BoxDecoration(
-          color: isAvailable ? const Color.fromARGB(255, 157, 196, 228) : Colors.white,
+          color: isSelected ? const Color.fromARGB(255, 157, 196, 228) : Colors.white,
           borderRadius: BorderRadius.circular(15),
           border: Border.all(
-            color: isAvailable ? Colors.white : const Color.fromARGB(255, 182, 193, 232),
+            color: isSelected ? Colors.white : const Color.fromARGB(255, 182, 193, 232),
           ),
         ),
-        child: Column(
-          children: [
-            Text(
-              time,
-              style: TextStyle(
-                color: isAvailable ? Colors.white : Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
+        child: Text(
+          time,
+          style: TextStyle(
+            color: isSelected ? Colors.white : Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
