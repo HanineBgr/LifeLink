@@ -1,16 +1,20 @@
-# LifeLink
+# 📖 Overview 
 
-LifeLink is a cross plateform mobile app designed to facilitate remote health monitoring and communication between patients and healthcare providers. It allows users communicate securely with medical professionals, enhancing access to healthcare services from the convenience of a mobile device.
+This Flutter project is designed to simplify the recruitment process for companies and job seekers. It offers a user-friendly interface for browsing job listings, submitting applications, and managing interviews.
 
-## Getting Started
+## ✨ Features
 
-This project is a starting point for a Flutter application.
+- **Real-time Health Data Tracking** : Monitor health parameters such as heart rate, steps, sleep patterns, and more.
+- **Accessible Healthcare Communication** : Enable easy communication between patients and healthcare professionals via secure messaging.
+- **Personalized Health Tips** : Receive AI-powered, personalized health suggestions tailored to each user's needs.
+- **Unified Experience** :  A cohesive platform for both patients and healthcare providers to track and manage health data efficiently.
 
-A few resources to get you started if this is your first Flutter project:
+## 🛠 Tech Stack 
+- **Frontend** : Flutter (Dart)
+- **Backend** : Node.js (Express)
+- **AI Technology** : Custom machine learning APIs
+- **Database** : Firebase, MongoDb
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🎨 Figma Design 
+https://www.figma.com/design/l1zb8dMZEBTM9Wu5dXf3J8/LifeLink?node-id=0-1&node-type=canvas&t=P9Pyfcl5HfOQRI1Y-0 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
